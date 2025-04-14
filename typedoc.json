@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"skipLibCheck": true,
+		"strictNullChecks": false
+	},
+	"entryPoints": [ "RVLTS/**/*.ts" ],
+	"name": "RVLTS",
+	"plugin": [ "typedoc-plugin-mdn-links" ],
+	"readme": "README.md"
+}

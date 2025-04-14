@@ -1,0 +1,13 @@
+{
+    "name": "@yomcube/rvlts",
+    "dependencies": {
+        "typescript": "^5.8.3"
+    },
+    "devDependencies": {
+        "typedoc": "^0.28.2",
+        "typedoc-plugin-mdn-links": "^5.0.1"
+    },
+    "scripts": {
+        "docs": "typedoc"
+    }
+}
