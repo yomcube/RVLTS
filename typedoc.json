@@ -3,6 +3,7 @@
 		"skipLibCheck": true,
 		"strictNullChecks": false
 	},
+	"emit": "both",
 	"entryPoints": [ "RVLTS/**/*.ts" ],
 	"name": "RVLTS",
 	"plugin": [ "typedoc-plugin-mdn-links" ],

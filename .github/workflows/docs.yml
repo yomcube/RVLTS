@@ -32,6 +32,8 @@ jobs:
         run: npm ci
       - name: Run TypeDoc
         run: npm run docs
+      - name: Copy built to docs
+        run: cp -r built docs/built
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
