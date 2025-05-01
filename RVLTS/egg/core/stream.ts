@@ -108,8 +108,8 @@ export class RamStream extends Stream {
 	m_buffer: Uint8Array;
 	m_size: number;
 	
-	constructor(data: Uint8Array, size: number) {
-		super();
+	constructor(e: Endian = Endian.BIG, data: Uint8Array, size: number) {
+		super(e);
 		this.m_buffer = data == null ? new Uint8Array(size) : data;
 		this.m_size = size;
 	}
