@@ -1,7 +1,7 @@
 // kiwi515/ogws:
 //   https://github.com/kiwi515/ogws/blob/master/include/revolution/GX/GXTypes.h
 
-export class GXColor {
+export type GXColor = {
     r: number;
     g: number;
     b: number;

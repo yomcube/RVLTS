@@ -3,18 +3,40 @@
 
 import { GXColor } from "revolution/GX/types"
 
-export class Color : GXColor {
-	constructor(r: number | GXColor, g: number?, b: number?, a: number?) {
-		
-	}
+export class Color implements GXColor {
+	r: number;
+    g: number;
+    b: number;
+    a: number;
 
-	fromU32(color: number) {
-		set(
-			color >> 24 & 0xFF,
-			color >> 16 & 0xFF,
-			color >> 8 & 0xFF,
-			color & 0xFF
-		);
+	constructor();
+	constructor(color: number);
+	constructor(color: GXColor);
+	constructor(r: number, g: number, b: number, a?: number);
+	constructor(r?: number | GXColor, g?: number, b?: number, a?: number) {
+		if (r == undefined) {
+			this.setU32(this.WHITE);
+			return;
+		}
+		if (g == undefined) {
+			if (typeof r == "number") {
+				this.setU32(r);
+				return;
+			}
+			// Assume GXColor
+			this.set(r.r, r.g, r.b, r.a);
+			return;
+		}
+		if (b == undefined) {
+			throw new Error("Parameter 'b' must be provided!");
+		}
+		
+		// Assume R, G, B are specified
+
+		this.r = 'r' in (r as GXColor) ? (r as GXColor).r : (r as number);
+		this.g = g;
+		this.b = b;
+		this.a = a == undefined ? 0xFF : a;
 	}
 
 	set(red: number, green: number, blue: number, alpha: number) {
@@ -22,6 +44,19 @@ export class Color : GXColor {
 		this.g = green;
 		this.b = blue;
 		this.a = alpha;
+	}
+
+	setU32(color: number) {
+		this.set(
+			color >> 24 & 0xFF,
+			color >> 16 & 0xFF,
+			color >> 8 & 0xFF,
+			color & 0xFF
+		);
+	}
+
+	static fromU32(color: number): Color {
+		return new Color(color);
 	}
 
     RED   = 0xFF0000FF;
