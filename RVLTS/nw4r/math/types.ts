@@ -10,33 +10,34 @@ export class VEC2 {
 		this.x = fx;
 		this.y = fy;
 	}
+	
+	/** + operator */
+	__plus(val: VEC2) {
+		return new VEC2(val.x + this.x, val.y + this.y);
+	}
+	/** - operator */
+	__minus(val: VEC2) {
+		return new VEC2(val.x - this.x, val.y - this.y);
+	}
+	/** == operator */
+	__doubleEqual(val: VEC2) {
+		return val.x == this.x && val.y == this.y;
+	}
+	/** != operator */
+	__notEqual(val: VEC2) {
+		return val.x != this.x || val.y != this.y;
+	}
 
 	/** += operator */
-	addSet(a: VEC2) {
-		this.x += a.x;
-		this.y += a.y;
-		return this
+	__addAssign(val: VEC2) {
+		this.x += val.x;
+		this.y += val.y;
+		return this;
 	}
 	/** -= operator */
-	subSet(a: VEC2) {
-		this.x -= a.x;
-		this.y -= a.y;
-	}
-	
-	/* + operator */
-	static add(a: VEC2, b: VEC2) {
-		return new VEC2(a.x + b.x, a.y + b.y);
-	}
-	/* - operator */
-	static sub(a: VEC2, b: VEC2) {
-		return new VEC2(a.x - b.x, a.y - b.y);
-	}
-	/* == operator */
-	static eq(a: VEC2, b: VEC2) {
-		return a.x == b.x && a.y == b.y;
-	}
-	/* != operator */
-	static neq(a: VEC2, b: VEC2) {
-		return a.x != b.x || a.y != b.y;
+	__minusAssign(val: VEC2) {
+		this.x -= val.x;
+		this.y -= val.y;
+		return this;
 	}
 }
