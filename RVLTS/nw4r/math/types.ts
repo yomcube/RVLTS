@@ -2,7 +2,11 @@
 //   https://github.com/kiwi515/ogws/blob/master/include/nw4r/math/math_types.h
 
 
-export class VEC2 {
+interface _VEC2 {
+	x: number;
+	y: number;
+}
+export class VEC2 implements _VEC2 {
 	x: number;
 	y: number;
 
