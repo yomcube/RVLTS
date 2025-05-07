@@ -1,6 +1,8 @@
 // kiwi515/ogws:
 //   https://github.com/kiwi515/ogws/blob/master/include/nw4r/snd/snd_Types.h
 
+import { NamedTupleMember } from "../../../node_modules/typescript/lib/typescript";
+
 export const CHANNEL_MIN: number = 1;
 export const CHANNEL_MAX: number = 2;
 
@@ -58,7 +60,12 @@ export enum PanCurve {
 };
 
 export type AdpcmParam = {
-    coef: Array<number, 16>;
+    coef: [
+        number, number, number, number,
+        number, number, number, number,
+        number, number, number, number,
+        number, number, number, number
+    ];
     gain: number;
     pred_scale: number;
     yn1: number;
