@@ -1,8 +1,6 @@
 // kiwi515/ogws:
 //   https://github.com/kiwi515/ogws/blob/master/include/nw4r/snd/snd_Types.h
 
-import { NamedTupleMember } from "../../../node_modules/typescript/lib/typescript";
-
 export const CHANNEL_MIN: number = 1;
 export const CHANNEL_MAX: number = 2;
 
