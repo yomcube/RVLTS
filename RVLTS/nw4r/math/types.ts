@@ -14,34 +14,152 @@ export class VEC2 implements _VEC2 {
 		this.x = fx;
 		this.y = fy;
 	}
+
+	len(): number {
+		return Math.sqrt(
+			this.x*this.x + this.y*this.y
+		);
+	}
 	
 	/** + operator */
-	__plus(val: VEC2) {
+	__plus(val: VEC2): VEC2 {
 		return new VEC2(val.x + this.x, val.y + this.y);
 	}
 	/** - operator */
-	__minus(val: VEC2) {
+	__minus(val: VEC2): VEC2 {
 		return new VEC2(val.x - this.x, val.y - this.y);
 	}
 	/** == operator */
-	__doubleEqual(val: VEC2) {
+	__doubleEqual(val: VEC2): boolean {
 		return val.x == this.x && val.y == this.y;
 	}
 	/** != operator */
-	__notEqual(val: VEC2) {
+	__notEqual(val: VEC2): boolean {
 		return val.x != this.x || val.y != this.y;
 	}
 
 	/** += operator */
-	__addAssign(val: VEC2) {
+	__addAssign(val: VEC2): VEC2 {
 		this.x += val.x;
 		this.y += val.y;
 		return this;
 	}
 	/** -= operator */
-	__minusAssign(val: VEC2) {
+	__minusAssign(val: VEC2): VEC2 {
 		this.x -= val.x;
 		this.y -= val.y;
 		return this;
+	}
+}
+
+interface _VEC3 {
+	x: number;
+	y: number;
+	z: number;
+}
+export class VEC3 implements _VEC3 {
+	x: number;
+	y: number;
+	z: number;
+
+	constructor(fx: number, fy: number, fz: number) {
+		this.x = fx;
+		this.y = fy;
+		this.z = fz;
+	}
+	
+	lenSq(): number {
+		return this.x*this.x + this.y*this.y + this.z*this.z;
+	}
+
+	/** Unary - operator */
+	__unaryNegation(): VEC3 {
+		return new VEC3(-this.x, -this.y, -this.z);
+	}
+
+	/** + operator */
+	__plus(val: VEC3): VEC3 {
+		return new VEC3(
+			this.x + val.x,
+			this.y + val.y,
+			this.z + val.z
+		);
+	}
+
+	/** - operator */
+	__minus(val: VEC3): VEC3 {
+		return new VEC3(
+			this.x - val.x,
+			this.y - val.y,
+			this.z - val.z
+		);
+	}
+
+	/** * operator */
+	__multiply(val: VEC3): VEC3 {
+		return new VEC3(
+			this.x * val.x,
+			this.y * val.y,
+			this.z * val.z
+		);
+	}
+
+	/** / operator */
+	__divide(val: VEC3): VEC3 {
+		return new VEC3(
+			this.x / val.x,
+			this.y / val.y,
+			this.z / val.z
+		);
+	}
+
+	/** += operator */
+	__addAssign(val: VEC3): VEC3 {
+		this.x += val.x;
+		this.y += val.y;
+		this.z += val.z;
+		return this;
+	}
+
+	/** += operator */
+	__minusAssign(val: VEC3): VEC3 {
+		this.x -= val.x;
+		this.y -= val.y;
+		this.z -= val.z;
+		return this;
+	}
+
+	/** *= operator */
+	__multiplyAssign(val: VEC3): VEC3 {
+		this.x *= val.x;
+		this.y *= val.y;
+		this.z *= val.z;
+		return this;
+	}
+
+	/** /= operator */
+	__divideAssign(val: VEC3): VEC3 {
+		this.x /= val.x;
+		this.y /= val.y;
+		this.z /= val.z;
+		return this;
+	}
+
+	/** == operator */
+	__doubleEqual(val: VEC3): boolean {
+		return (
+			this.x == val.x &&
+			this.y == val.y &&
+			this.z == val.z
+		);
+	}
+
+	/** != operator */
+	__notEqual(val: VEC3): boolean {
+		return (
+			this.x != val.x ||
+			this.y != val.y ||
+			this.z != val.z
+		);
 	}
 }
