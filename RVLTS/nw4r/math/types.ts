@@ -164,23 +164,21 @@ export class VEC3 implements _VEC3 {
 	}
 }
 
-interface _MTX33 {
-	{
-		_00: number, _01: number, _02: number,
-		_10: number, _11: number, _12: number,
-		_20: number, _21: number, _22: number
-	} | {
-		m: [
-			[number, number, number],
-			[number, number, number],
-			[number, number, number]
-		]
-	} | {
-		a: [
-			number, number, number,
-			number, number, number,
-			number, number, number
-		]
-	}
-}
+type _MTX33 = {
+	_00: number, _01: number, _02: number,
+	_10: number, _11: number, _12: number,
+	_20: number, _21: number, _22: number
+} | {
+	m: [
+		[number, number, number],
+		[number, number, number],
+		[number, number, number]
+	]
+} | {
+	a: [
+		number, number, number,
+		number, number, number,
+		number, number, number
+	]
+};
 class MTX33 implements _MTX33 {}
