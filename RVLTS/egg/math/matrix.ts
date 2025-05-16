@@ -59,45 +59,25 @@ export class Matrix34f {
         let wx = 2 * quat.w * quat.x;
         let wy = 2 * quat.w * quat.y;
 
-        tbl[0][0] = 1 - yy - zz;
-        tbl[0][1] = xy - wz;
-        tbl[0][2] = xz + wy;
-
-        tbl[1][0] = xy + wz;
-        tbl[1][1] = 1 - xx - zz;
-        tbl[1][2] = yz - wx;
-
-        tbl[2][0] = xz - wy;
-        tbl[2][1] = yz + wx;
-        tbl[2][2] = 1 - xx - yy;
-
-        tbl[0][3] = 0;
-        tbl[1][3] = 0;
-        tbl[2][3] = 0;
+        this.tbl = [
+            [1 - yy - zz, xy - wz, xz + wy, 0],
+            [xy + wz, 1 - xx - zz, yz - wx, 0],
+            [xz - wy, yz + wx, 1 - xx - yy, 0]
+        ];
     }
 
     makeS(vec: Vector3f) {
-        tbl[0][0] = vec.x;
-        tbl[0][1] = 0;
-        tbl[0][2] = 0;
-
-        tbl[1][0] = 0;
-        tbl[1][1] = vec.y;
-        tbl[1][2] = 0;
-
-        tbl[2][0] = 0;
-        tbl[2][1] = 0;
-        tbl[2][2] = vec.z;
-
-        tbl[0][3] = 0;
-        tbl[1][3] = 0;
-        tbl[2][3] = 0;
+        this.tbl = [
+            [vec.x, 0, 0, 0],
+            [0, vec.y, 0, 0],
+            [0, 0, vec.z, 0]
+        ];
     }
 
     setAxisRotation(vec: Vector3f, angle: number) {
         let q: Quatf = new Quatf();
         q.setAxisRotation(vec, angle);
-        makeQ(q);
+        this.makeQ(q);
     }
 
     // TODO: loadPosMtx
