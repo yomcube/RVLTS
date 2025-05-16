@@ -4,7 +4,7 @@
 
 import { Vector3f } from "egg/math/vector";
 
-class Quatf {
+export class Quatf {
     x: number;
     y: number;
     z: number;
@@ -23,8 +23,8 @@ class Quatf {
         let angleSin: number = Math.sin(angleHalf);
 
         this.w = angleCos;
-        this.z = angleSin * axis.z;
         this.x = angleSin * axis.x;
         this.y = angleSin * axis.y;
+        this.z = angleSin * axis.z;
     }
 }
