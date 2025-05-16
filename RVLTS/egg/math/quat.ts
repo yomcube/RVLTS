@@ -10,7 +10,16 @@ export class Quatf {
     z: number;
     w: number;
 
-    constructor(_w: number, vec: Vector3f) {
+    constructor()
+    constructor(_w: number, vec: Vector3f)
+    constructor(_w?: number, vec?: Vector3f) {
+        if (_w == undefined && vec == undefined) {
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
+            this.w = 0;
+            return;
+        }
         this.x = vec.x;
         this.y = vec.y;
         this.z = vec.z;
