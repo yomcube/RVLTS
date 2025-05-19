@@ -15,6 +15,7 @@ export class VEC2 implements _VEC2 {
 		this.y = fy;
 	}
 
+	/** Length of the vector. */
 	len(): number {
 		return Math.sqrt(
 			this.x*this.x + this.y*this.y
@@ -68,6 +69,7 @@ export class VEC3 implements _VEC3 {
 		this.z = fz;
 	}
 	
+	/** Squared length of the vector. */
 	lenSq(): number {
 		return this.x*this.x + this.y*this.y + this.z*this.z;
 	}
@@ -160,6 +162,24 @@ export class VEC3 implements _VEC3 {
 			this.x != val.x ||
 			this.y != val.y ||
 			this.z != val.z
+		);
+	}
+
+	/** Dot product of two 3-dimensional vectors. */
+	static dot(vec1: VEC3, vec2: VEC3): number {
+		return (
+			vec1.x * vec2.x +
+			vec1.y * vec2.y +
+			vec1.z * vec2.z
+		);
+	}
+
+	/** Linear interpolation of two 3-dimensional vectors. */
+	static lerp(vec1: VEC3, vec2, VEC3, t: number) {
+		return new VEC3(
+			(vec2.x - vec1.x) * t + vec1.x,
+			(vec2.y - vec1.y) * t + vec1.y,
+			(vec2.z - vec1.z) * t + vec1.z,
 		);
 	}
 }
