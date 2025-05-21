@@ -7,7 +7,7 @@
 
 // TODO: Implement text mode
 
-import { assert } from "utils/assert";
+import { assert } from "utils/utils";
 
 export enum Endian {
 	BIG,

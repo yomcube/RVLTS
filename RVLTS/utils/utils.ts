@@ -4,3 +4,7 @@ export function assert(b: boolean, msg?: string) {
 		throw new Error(`Assert failed${m}`);
 	}
 }
+
+export function und0(x: number | undefined): number {
+	return x == undefined ? 0 : x;
+}
