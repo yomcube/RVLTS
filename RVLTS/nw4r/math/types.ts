@@ -2,6 +2,9 @@
 //   https://github.com/kiwi515/ogws/blob/master/include/nw4r/math/math_types.h
 
 import { und0 } from "utils/utils";
+import {
+	vecCrossProduct, vecMag, vecNormalize, vecSquareDistance
+} from "revolution/MTX/vec";
 
 //////////////
 //// VEC2 ////
@@ -192,10 +195,32 @@ export class VEC3 implements _VEC3 {
 	}
 
 	/** Multiplication of a 3-dimensional vector by a scalar. */
-	static scale(out: VEC3, v1: VEC3, x: number) {
-		out.x = v1.x * x;
-		out.y = v1.y * x;
-		out.z = v1.z * x;
+	static scale(out: VEC3, v: VEC3, x: number) {
+		out.x = v.x * x;
+		out.y = v.y * x;
+		out.z = v.z * x;
+	}
+
+	/** Cross product of two 3-dimensional vectors. */
+	static cross(out: VEC3, a: VEC3, b: VEC3): VEC3 {
+		vecCrossProduct(out, a, b);
+		return out;
+	}
+
+	/** Squared distance of two 3-dimensional vectors. */
+	static distSq(a: VEC3, b: VEC3): number {
+		return vecSquareDistance(a, b);
+	}
+
+	/** Length of a 3-dimensional vector. */
+	static len(v: VEC3): number {
+		return vecMag(v);
+	}
+
+	/** Normalization of a 3-dimensional vector. */
+	static normalize(out: VEC3, v: VEC3): VEC3 {
+		vecNormalize(out, v);
+		return out;
 	}
 }
 
