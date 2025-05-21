@@ -1,6 +1,7 @@
 // kiwi515/ogws:
 //   https://github.com/kiwi515/ogws/blob/master/include/egg/core/eggStream.h
 //   https://github.com/kiwi515/ogws/blob/master/src/egg/core/eggStream.cpp
+//
 // vabold/Kinoko:
 //   https://github.com/vabold/Kinoko/blob/main/source/egg/util/Stream.hh
 //   https://github.com/vabold/Kinoko/blob/main/source/egg/util/Stream.cc

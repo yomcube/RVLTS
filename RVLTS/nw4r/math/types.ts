@@ -1,5 +1,6 @@
 // kiwi515/ogws:
 //   https://github.com/kiwi515/ogws/blob/master/include/nw4r/math/math_types.h
+//   https://github.com/kiwi515/ogws/blob/master/src/nw4r/math/math_types.cpp
 
 import { und0 } from "utils/utils";
 import {

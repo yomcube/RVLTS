@@ -1,6 +1,8 @@
-// https://github.com/kiwi515/ogws/blob/master/include/nw4r/math/math_arithmetic.h
+// kiwi515/ogws:
+//   https://github.com/kiwi515/ogws/blob/master/include/nw4r/math/math_arithmetic.h
+//   https://github.com/kiwi515/ogws/blob/master/src/nw4r/math/math_arithmetic.cpp
 
-// TODO: literally everything else
+// TODO everything else
 
 /** Emulates the `fabs` instruction. Returns the absolute value of `x`. */
 export function FAbs(x: number): number {

@@ -1,6 +1,5 @@
 // kiwi515/ogws:
 //   https://github.com/kiwi515/ogws/blob/master/include/egg/core/eggBitFlag.h
-//
 
 export class TBitFlag {
     value: number;

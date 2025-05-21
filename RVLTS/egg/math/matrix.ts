@@ -4,6 +4,7 @@
 
 import { Quatf } from "egg/math/quat";
 import { Vector3f } from "egg/math/vector";
+import { und0 } from "utils/utils";
 
 export class Matrix33f {
     tbl: [
@@ -22,15 +23,21 @@ export class Matrix34f {
         [number, number, number, number]
     ];
 
+    constructor()
     constructor(
         _00: number, _01: number, _02: number, _03: number,
         _10: number, _11: number, _12: number, _13: number,
         _20: number, _21: number, _22: number, _23: number
+    )
+    constructor(
+        _00?: number, _01?: number, _02?: number, _03?: number,
+        _10?: number, _11?: number, _12?: number, _13?: number,
+        _20?: number, _21?: number, _22?: number, _23?: number
     ) {
         this.tbl = [
-            [_00, _01, _02, _03],
-            [_10, _11, _12, _13],
-            [_20, _21, _22, _23]
+            [und0(_00), und0(_01), und0(_02), und0(_03)],
+            [und0(_10), und0(_11), und0(_12), und0(_13)],
+            [und0(_20), und0(_21), und0(_22), und0(_23)]
         ];
     }
 
