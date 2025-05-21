@@ -2,8 +2,38 @@
 //   https://github.com/kiwi515/ogws/blob/master/include/nw4r/math/math_geometry.h
 //   https://github.com/kiwi515/ogws/blob/master/src/nw4r/math/math_geometry.cpp
 
+import { tanDeg } from "nw4r/math/triangular";
 import { MTX34, VEC3 } from "nw4r/math/types";
 import { std_swap } from "utils/utils";
+
+
+export enum IntersectionResult {
+    INTERSECTION_NONE,
+    INTERSECTION_1,
+    INTERSECTION_2,
+
+    INTERSECTION_LINE3_ON_PLANE = INTERSECTION_2,
+    INTERSECTION_RAY3_ON_PLANE = INTERSECTION_2,
+    INTERSECTION_SEGMENT3_ON_PLANE = INTERSECTION_2,
+
+    INTERSECTION_OUTSIDE = 0,
+    INTERSECTION_INSIDE,
+    INTERSECTION_INTERSECT
+};
+
+export function intersectionAABB(pA: AABB, pB: AABB): boolean {
+    if (pA.min.x > pB.max.x || pB.min.x > pA.max.x ||
+        pA.min.y > pB.max.y || pB.min.y > pA.max.y ||
+        pA.min.z > pB.max.z || pB.min.z > pA.max.z) {
+        return false;
+    }
+
+    return true;
+}
+
+///////////////
+//// PLANE ////
+///////////////
 
 export class PLANE {
     n: VEC3;
@@ -25,6 +55,10 @@ export class PLANE {
         return this.d + VEC3.dot(this.n, point);
     }
 }
+
+//////////////
+//// AABB ////
+//////////////
 
 export class AABB {
     min: VEC3;
@@ -167,5 +201,115 @@ export class AABB {
         this.max.x = x1;
         this.max.y = y1;
         this.max.z = z1;
+    }
+}
+
+/////////////////
+//// FRUSTUM ////
+/////////////////
+enum Point {
+    NEAR_TL,
+    NEAR_TR,
+    NEAR_BR,
+    NEAR_BL,
+
+    FAR_TL,
+    FAR_TR,
+    FAR_BR,
+    FAR_BL,
+
+    MAX
+};
+enum Plane {
+    L,
+    R,
+    N,
+    F,
+    T,
+    B,
+
+    MAX
+};
+export class FRUSTUM {
+    mCamMtx: MTX34;
+    mPlaneL: PLANE;
+    mPlaneR: PLANE;
+    mPlaneT: PLANE;
+    mPlaneB: PLANE;
+    mNearZ: number;
+    mFarZ: number;
+    mBox: AABB;
+    mPlanes: PLANE[];
+
+    constructor() {}
+
+    set(fovy: number, aspect: number, n: number, f: number, camMtx: MTX34)
+    set(t: number, b: number, l: number, r: number, n: number, f: number, camMtx: MTX34)
+    set(
+        var1: number, var2: number, var3: number, var4: number,
+        var5: number | MTX34, var6?: number, var7?: MTX34
+    ) {
+        if (typeof var5 != "number") {
+            this.#set_fovy_aspect_n_f_camMtx(var1, var2, var3, var4, var5);
+        }
+    }
+    #set_fovy_aspect_n_f_camMtx(
+        fovy: number, aspect: number, n: number, f: number, camMtx: MTX34
+    ) {
+        let tan = tanDeg(fovy * 0.5);
+        let ny = tan * n;
+        let nx = ny * aspect;
+        this.#set_t_b_l_r_n_f_camMtx(ny, -ny, -nx, nx, n, f, camMtx);
+    }
+    #set_t_b_l_r_n_f_camMtx(
+        t: number, b: number, l: number, r: number, n: number, f: number, camMtx: MTX34
+    ) {
+        // TODO
+        // https://github.com/kiwi515/ogws/blob/master/src/nw4r/math/math_geometry.cpp#L153-L219
+    }
+
+    intersectAABB_Ex(box: AABB) {
+        if (!intersectionAABB(box, this.mBox)) {
+            return IntersectionResult.INTERSECTION_OUTSIDE;
+        }
+
+        let result: IntersectionResult = IntersectionResult.INTERSECTION_INSIDE;
+        let p: VEC3, n: VEC3;
+
+        for (let i: number = 0; i < Plane.MAX; i++) {
+            if (this.mPlanes[i].n.x >= 0) {
+                p.x = box.min.x;
+                n.x = box.max.x;
+            } else {
+                p.x = box.max.x;
+                n.x = box.min.x;
+            }
+
+            if (this.mPlanes[i].n.y >= 0) {
+                p.y = box.min.y;
+                n.y = box.max.y;
+            } else {
+                p.y = box.max.y;
+                n.y = box.min.y;
+            }
+
+            if (this.mPlanes[i].n.z >= 0) {
+                p.z = box.min.z;
+                n.z = box.max.z;
+            } else {
+                p.z = box.max.z;
+                n.z = box.min.z;
+            }
+
+            if (this.mPlanes[i].test(p) > 0) {
+                return IntersectionResult.INTERSECTION_NONE;
+            }
+
+            if (this.mPlanes[i].test(n) > 0) {
+                result = IntersectionResult.INTERSECTION_INTERSECT;
+            }
+        }
+
+        return result;
     }
 }
