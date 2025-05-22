@@ -4,7 +4,7 @@
 
 import { Mtx, Quaternion } from "revolution/MTX/types";
 
-const MY_EPSILON: number 1e-5
+const MY_EPSILON: number = 1e-5;
 
 export function quatMultiply(prod: Quaternion, a: Quaternion, b: Quaternion) {
     prod.x = a.y*b.z + a.w*b.x - a.x*b.w - a.z*b.y;
@@ -31,8 +31,8 @@ export function quatMtx(quat: Quaternion, mtx: Mtx) {
 
     trace = mtx[0][0] + mtx[1][1] + mtx[2][2];
 
-    if (trace > 0.0f) {
-        root = sqrtf(1 + trace);
+    if (trace > 0) {
+        root = Math.sqrt(1 + trace);
         quat.w = root * 0.5;
 
         root = 0.5 / root;
@@ -53,7 +53,7 @@ export function quatMtx(quat: Quaternion, mtx: Mtx) {
         dnext = next[dmax];
         dlast = next[dnext];
 
-        root = sqrtf(mtx[dmax][dmax] - (mtx[dnext][dnext] + mtx[dlast][dlast]) + 1);
+        root = Math.sqrt(mtx[dmax][dmax] - (mtx[dnext][dnext] + mtx[dlast][dlast]) + 1);
         temp[dmax] = 0.5 * root;
 
         if (0 != root) {
@@ -88,7 +88,7 @@ export function quatSlerp(out: Quaternion, a: Quaternion, b: Quaternion, t: numb
         sintheta = Math.sin(theta);
 
         coeffa = Math.sin((1 - t) * theta) / sintheta;
-        coeffb *= Math.sinf(t * theta) / sintheta;
+        coeffb *= Math.sin(t * theta) / sintheta;
     } else {
         coeffa = 1 - t;
         coeffb *= t;
