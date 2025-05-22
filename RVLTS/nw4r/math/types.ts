@@ -272,9 +272,6 @@ export class MTX33 {
 		f10: number, f11: number, f12: number,
 		f20: number, f21: number, f22: number
 	)
-	/**
-	 * @internal 
-	 */
 	constructor(
 		f00?: number, f01?: number, f02?: number,
 		f10?: number, f11?: number, f12?: number,
@@ -340,9 +337,6 @@ export class MTX34 {
 		f10: number, f11: number, f12: number, f13: number,
 		f20: number, f21: number, f22: number, f23: number
 	)
-	/**
-	 * @internal 
-	 */
 	constructor(
 		f00?: number, f01?: number, f02?: number, f03?: number,
 		f10?: number, f11?: number, f12?: number, f13?: number,

@@ -65,9 +65,6 @@ export class AABB {
 
     set(points: VEC3[], num: number): void
     set(box: AABB, mtx: MTX34): void
-    /**
-     * @internal
-     */
     set(var1: VEC3[] | AABB, var2: number | MTX34): void {
         if (Array.isArray(var1) && typeof var2 == "number") {
             this.#set_points_num(var1, var2);
@@ -247,9 +244,6 @@ export class FRUSTUM {
 
     set(fovy: number, aspect: number, n: number, f: number, camMtx: MTX34): void
     set(t: number, b: number, l: number, r: number, n: number, f: number, camMtx: MTX34): void
-    /**
-     * @internal
-     */
     set(
         v1: number, v2: number, v3: number, v4: number,
         v5: number | MTX34, v6?: number, v7?: MTX34

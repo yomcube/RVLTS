@@ -29,9 +29,6 @@ export class Matrix34f {
         _10: number, _11: number, _12: number, _13: number,
         _20: number, _21: number, _22: number, _23: number
     )
-    /**
-     * @internal
-     */
     constructor(
         _00?: number, _01?: number, _02?: number, _03?: number,
         _10?: number, _11?: number, _12?: number, _13?: number,

@@ -13,9 +13,6 @@ export class Color implements GXColor {
 	constructor(color: number);
 	constructor(color: GXColor);
 	constructor(r: number, g: number, b: number, a?: number);
-	/**
-	 * @internal
-	 */
 	constructor(r?: number | GXColor, g?: number, b?: number, a?: number) {
 		if (r == undefined) {
 			this.setU32(this.WHITE);

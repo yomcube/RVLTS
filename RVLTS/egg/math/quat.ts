@@ -12,9 +12,6 @@ export class Quatf {
 
     constructor()
     constructor(_w: number, vec: Vector3f)
-    /**
-     * @internal
-     */
     constructor(_w?: number, vec?: Vector3f) {
         if (_w == undefined && vec == undefined) {
             this.x = 0;
