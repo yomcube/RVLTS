@@ -4,7 +4,7 @@
 
 import { Mtx, Vec } from "revolution/MTX/types";
 
-export function mtxMultVec(out: Vec, mtx: Mtx, vec: Vec) {
+export function mtxMultVec(out: Vec, mtx: Mtx, vec: Vec): void {
     out.x = (
         mtx[0][0] * vec.x + mtx[0][1] * vec.y +
         mtx[0][2] * vec.z + mtx[0][3]

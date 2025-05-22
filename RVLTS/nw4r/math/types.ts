@@ -3,6 +3,7 @@
 //   https://github.com/kiwi515/ogws/blob/master/src/nw4r/math/math_types.cpp
 
 import { und0 } from "utils/utils";
+import { Vec } from "revolution/MTX/types";
 import {
 	vecCrossProduct, vecMag, vecNormalize, vecSquareDistance
 } from "revolution/MTX/vec";
@@ -19,9 +20,11 @@ export class VEC2 implements _VEC2 {
 	x: number;
 	y: number;
 
-	constructor(fx: number, fy: number) {
-		this.x = fx;
-		this.y = fy;
+	constructor()
+	constructor(fx: number, fy: number)
+	constructor(fx?: number, fy?: number) {
+		this.x = und0(fx);
+		this.y = und0(fy);
 	}
 
 	/** Length of the vector. */
@@ -78,11 +81,29 @@ export class VEC3 implements _VEC3 {
 	z: number;
 
 	constructor()
+	constructor(vec: Vec)
+	constructor(vec: _VEC3)
+	constructor(array: number[])
 	constructor(fx: number, fy: number, fz: number)
-	constructor(fx?: number, fy?: number, fz?: number) {
-		this.x = fx == undefined ? 0 : fx;
-		this.y = fy == undefined ? 0 : fy;
-		this.z = fz == undefined ? 0 : fz;
+	constructor(v1?: Vec | _VEC3 | number[] | number, v2?: number, v3?: number) {
+		// number, number, number
+		if (typeof v1 == "number") {
+			this.x = und0(v1);
+			this.y = und0(v2);
+			this.z = und0(v3);
+			return;
+		}
+		// number[]
+		if (Array.isArray(v1)) {
+			this.x = und0(v1[0]);
+			this.y = und0(v1[1]);
+			this.z = und0(v1[2]);
+			return;
+		}
+		// Vec | _VEC3
+		this.x = und0(v1.x);
+		this.y = und0(v1.y);
+		this.z = und0(v1.z);
 	}
 	
 	/** Squared length of the vector. */
@@ -251,6 +272,9 @@ export class MTX33 {
 		f10: number, f11: number, f12: number,
 		f20: number, f21: number, f22: number
 	)
+	/**
+	 * @internal 
+	 */
 	constructor(
 		f00?: number, f01?: number, f02?: number,
 		f10?: number, f11?: number, f12?: number,
@@ -316,6 +340,9 @@ export class MTX34 {
 		f10: number, f11: number, f12: number, f13: number,
 		f20: number, f21: number, f22: number, f23: number
 	)
+	/**
+	 * @internal 
+	 */
 	constructor(
 		f00?: number, f01?: number, f02?: number, f03?: number,
 		f10?: number, f11?: number, f12?: number, f13?: number,

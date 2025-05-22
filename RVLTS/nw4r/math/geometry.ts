@@ -4,7 +4,6 @@
 
 import { tanDeg } from "nw4r/math/triangular";
 import { MTX34, VEC3 } from "nw4r/math/types";
-import { std_swap } from "utils/utils";
 
 
 export enum IntersectionResult {
@@ -41,7 +40,7 @@ export class PLANE {
 
     constructor() {}
 
-    set(p0: VEC3, p1: VEC3, p2: VEC3) {
+    set(p0: VEC3, p1: VEC3, p2: VEC3): void {
         
         let v0: VEC3, v1: VEC3, v2: VEC3;
         
@@ -64,9 +63,12 @@ export class AABB {
     min: VEC3;
     max: VEC3;
 
-    set(points: VEC3[], num: number)
-    set(box: AABB, mtx: MTX34)
-    set(var1: VEC3[] | AABB, var2: number | MTX34) {
+    set(points: VEC3[], num: number): void
+    set(box: AABB, mtx: MTX34): void
+    /**
+     * @internal
+     */
+    set(var1: VEC3[] | AABB, var2: number | MTX34): void {
         if (Array.isArray(var1) && typeof var2 == "number") {
             this.#set_points_num(var1, var2);
             return;
@@ -77,7 +79,7 @@ export class AABB {
         }
         throw new TypeError("One of the parameters has an invalid type!");
     }
-    #set_points_num(points: VEC3[], num: number) {
+    #set_points_num(points: VEC3[], num: number): void {
         this.min = points[0];
         this.max = points[0];
 
@@ -101,7 +103,7 @@ export class AABB {
             }
         }
     }
-    #set_box_mtx(box: AABB, mtx: MTX34) {
+    #set_box_mtx(box: AABB, mtx: MTX34): void {
         let x0: number, y0: number, z0: number;
         let x1: number, y1: number, z1: number;
         let a0: number, a1: number;
@@ -117,7 +119,7 @@ export class AABB {
         b1 = mtx._02 * box.max.z;
 
         if (x0 > x1) {
-            [x0, x1] = std_swap(x0, x1);
+            [x0, x1] = [x1, x0]; // std::swap
         }
 
         if (a0 < a1) {
@@ -146,7 +148,7 @@ export class AABB {
         b1 = mtx._12 * box.max.z;
 
         if (y0 > y1) {
-            [y0, y1] = std_swap(y0, y1);
+            [y0, y1] = [y1, y0]; // std::swap
         }
 
         if (a0 < a1) {
@@ -175,7 +177,7 @@ export class AABB {
         b1 = mtx._22 * box.max.z;
 
         if (z0 > z1) {
-            [z0, z1] = std_swap(z0, z1);
+            [z0, z1] = [z1, z0]; // std::swap
         }
 
         if (a0 < a1) {
@@ -243,19 +245,24 @@ export class FRUSTUM {
 
     constructor() {}
 
-    set(fovy: number, aspect: number, n: number, f: number, camMtx: MTX34)
-    set(t: number, b: number, l: number, r: number, n: number, f: number, camMtx: MTX34)
+    set(fovy: number, aspect: number, n: number, f: number, camMtx: MTX34): void
+    set(t: number, b: number, l: number, r: number, n: number, f: number, camMtx: MTX34): void
+    /**
+     * @internal
+     */
     set(
-        var1: number, var2: number, var3: number, var4: number,
-        var5: number | MTX34, var6?: number, var7?: MTX34
-    ) {
-        if (typeof var5 != "number") {
-            this.#set_fovy_aspect_n_f_camMtx(var1, var2, var3, var4, var5);
+        v1: number, v2: number, v3: number, v4: number,
+        v5: number | MTX34, v6?: number, v7?: MTX34
+    ): void {
+        if (typeof v5 != "number") {
+            this.#set_fovy_aspect_n_f_camMtx(v1, v2, v3, v4, v5 as MTX34);
+            return;
         }
+        this.#set_t_b_l_r_n_f_camMtx(v1, v2, v3, v4, v5 as number, v6, v7);
     }
     #set_fovy_aspect_n_f_camMtx(
         fovy: number, aspect: number, n: number, f: number, camMtx: MTX34
-    ) {
+    ): void {
         let tan = tanDeg(fovy * 0.5);
         let ny = tan * n;
         let nx = ny * aspect;
@@ -263,12 +270,12 @@ export class FRUSTUM {
     }
     #set_t_b_l_r_n_f_camMtx(
         t: number, b: number, l: number, r: number, n: number, f: number, camMtx: MTX34
-    ) {
+    ): void {
         // TODO
         // https://github.com/kiwi515/ogws/blob/master/src/nw4r/math/math_geometry.cpp#L153-L219
     }
 
-    intersectAABB_Ex(box: AABB) {
+    intersectAABB_Ex(box: AABB): IntersectionResult {
         if (!intersectionAABB(box, this.mBox)) {
             return IntersectionResult.INTERSECTION_OUTSIDE;
         }

@@ -5,19 +5,19 @@
 import { Vec } from "revolution/MTX/types"
 
 
-export function vecAdd(out: Vec, a: Vec, b: Vec) {
+export function vecAdd(out: Vec, a: Vec, b: Vec): void {
     out.x = a.x + b.x;
     out.y = a.y + b.y;
     out.z = a.z + b.z;
 }
 
-export function vecScale(out: Vec, v: Vec, scale: number) {
+export function vecScale(out: Vec, v: Vec, scale: number): void {
     out.x = v.x * scale;
     out.y = v.y * scale;
     out.z = v.z * scale;
 }
 
-export function vecNormalize(out: Vec, v: Vec) {
+export function vecNormalize(out: Vec, v: Vec): void {
     let dot: number = v.x*v.x + v.y*v.y + v.z*v.z;
     let mag: number = Math.sqrt(dot);
 
@@ -39,13 +39,13 @@ export function vecDotProduct(a: Vec, b: Vec): number {
     );
 }
 
-export function vecCrossProduct(out: Vec, a: Vec, b: Vec) {
+export function vecCrossProduct(out: Vec, a: Vec, b: Vec): void {
     out.x = (a.y * b.z) - (a.z * b.y);
     out.y = (a.z * b.x) - (a.x * b.z);
     out.z = (a.x * b.y) - (a.y * b.x);
 }
 
-export function vecHalfAngle(a: Vec, b: Vec, out: Vec) {
+export function vecHalfAngle(a: Vec, b: Vec, out: Vec): void {
     let na: Vec, nb: Vec, ns: Vec;
 
     na.x = -a.x;

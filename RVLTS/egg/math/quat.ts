@@ -12,6 +12,9 @@ export class Quatf {
 
     constructor()
     constructor(_w: number, vec: Vector3f)
+    /**
+     * @internal
+     */
     constructor(_w?: number, vec?: Vector3f) {
         if (_w == undefined && vec == undefined) {
             this.x = 0;
@@ -26,7 +29,7 @@ export class Quatf {
         this.w = _w;
     }
 
-    setAxisRotation(axis: Vector3f, angle: number) {
+    setAxisRotation(axis: Vector3f, angle: number): void {
         let angleHalf: number = angle * 0.5;
         let angleCos: number = Math.cos(angleHalf);
         let angleSin: number = Math.sin(angleHalf);

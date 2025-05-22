@@ -29,6 +29,9 @@ export class Matrix34f {
         _10: number, _11: number, _12: number, _13: number,
         _20: number, _21: number, _22: number, _23: number
     )
+    /**
+     * @internal
+     */
     constructor(
         _00?: number, _01?: number, _02?: number, _03?: number,
         _10?: number, _11?: number, _12?: number, _13?: number,
@@ -41,7 +44,7 @@ export class Matrix34f {
         ];
     }
 
-    makeZero() {
+    makeZero(): void {
         this.tbl = [
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -49,13 +52,13 @@ export class Matrix34f {
         ];
     }
 
-    makeIdentity() {
+    makeIdentity(): void {
         this.tbl[0][0] = 1;
         this.tbl[1][1] = 1;
         this.tbl[2][2] = 1;
     }
 
-    makeQ(quat: Quatf) {
+    makeQ(quat: Quatf): void {
         let yy = 2 * quat.y * quat.y;
         let zz = 2 * quat.z * quat.z;
         let xx = 2 * quat.x * quat.x;
@@ -73,7 +76,7 @@ export class Matrix34f {
         ];
     }
 
-    makeS(vec: Vector3f) {
+    makeS(vec: Vector3f): void {
         this.tbl = [
             [vec.x, 0, 0, 0],
             [0, vec.y, 0, 0],
@@ -81,7 +84,7 @@ export class Matrix34f {
         ];
     }
 
-    setAxisRotation(vec: Vector3f, angle: number) {
+    setAxisRotation(vec: Vector3f, angle: number): void {
         let q: Quatf = new Quatf();
         q.setAxisRotation(vec, angle);
         this.makeQ(q);
@@ -90,8 +93,9 @@ export class Matrix34f {
     // TODO: loadPosMtx
 
     // Can't overload operator()
-
-    static readonly ident: Matrix34f = new Matrix34f(
+}
+export namespace Matrix34f {
+    const ident: Matrix34f = new Matrix34f(
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0

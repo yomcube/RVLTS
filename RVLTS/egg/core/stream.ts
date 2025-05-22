@@ -28,7 +28,7 @@ export class Stream {
 	setEndian(e: Endian) {
 		this.m_endian = e;
 	}
-	/** Gets the stream index */
+	/** Gets the stream index. */
 	get index(): number {
 		return this.m_index;
 	}

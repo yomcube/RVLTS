@@ -7,7 +7,7 @@ export class TBitFlag {
     constructor() {
         this.makeAllZero();
     }
-    makeAllZero() {
+    makeAllZero(): void {
         this.value = 0;
     }
     makeMask(bit: number): number {

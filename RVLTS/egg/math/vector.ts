@@ -9,6 +9,11 @@ export class Vector2f extends VEC2 {
     static readonly ex: Vector2f = new Vector2f(1, 0);
     static readonly ey: Vector2f = new Vector2f(0, 1);
 }
+export namespace Vector2f {
+    const zero: Vector2f = new Vector2f(0, 0);
+    const ex: Vector2f = new Vector2f(1, 0);
+    const ey: Vector2f = new Vector2f(0, 1);
+}
 
 export class Vector3f extends VEC3 {
     /** Returns the squared magnitude of the vector. */
@@ -39,9 +44,10 @@ export class Vector3f extends VEC3 {
 
         return mag;
     }
-
-    static readonly zero: Vector3f = new Vector3f(0, 0, 0);
-    static readonly ex: Vector3f = new Vector3f(1, 0, 0);
-    static readonly ey: Vector3f = new Vector3f(0, 1, 0);
-    static readonly ez: Vector3f = new Vector3f(0, 0, 1);
+}
+export namespace Vector3f {
+    const zero: Vector3f = new Vector3f(0, 0, 0);
+    const ex: Vector3f = new Vector3f(1, 0, 0);
+    const ey: Vector3f = new Vector3f(0, 1, 0);
+    const ez: Vector3f = new Vector3f(0, 0, 1);
 }

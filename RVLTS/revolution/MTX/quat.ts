@@ -6,14 +6,14 @@ import { Mtx, Quaternion } from "revolution/MTX/types";
 
 const MY_EPSILON: number = 1e-5;
 
-export function quatMultiply(prod: Quaternion, a: Quaternion, b: Quaternion) {
+export function quatMultiply(prod: Quaternion, a: Quaternion, b: Quaternion): void {
     prod.x = a.y*b.z + a.w*b.x - a.x*b.w - a.z*b.y;
     prod.y = -a.x*b.z + a.z*b.x - a.y*b.w + a.w*b.y;
     prod.z = a.w*b.z - a.y*b.x + a.z*b.w - a.x*b.y;
     prod.w = -a.z*b.z - a.x*b.x + a.w*b.w + a.y*b.y;
 }
 
-export function quatNormalize(out: Quaternion, q: Quaternion) {
+export function quatNormalize(out: Quaternion, q: Quaternion): void {
     let dot: number = q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w;
     let mag: number = Math.sqrt(dot);
 
@@ -23,7 +23,7 @@ export function quatNormalize(out: Quaternion, q: Quaternion) {
     out.w = q.w / mag;
 }
 
-export function quatMtx(quat: Quaternion, mtx: Mtx) {
+export function quatMtx(quat: Quaternion, mtx: Mtx): void {
     let root: number, trace: number;
     let dmax: number, dnext: number, dlast: number;
     let next: number[] = [1, 2, 0];
@@ -70,7 +70,7 @@ export function quatMtx(quat: Quaternion, mtx: Mtx) {
     }
 }
 
-export function quatSlerp(out: Quaternion, a: Quaternion, b: Quaternion, t: number) {
+export function quatSlerp(out: Quaternion, a: Quaternion, b: Quaternion, t: number): void {
     let dot: number;
     let coeffa: number, coeffb: number;
     let theta: number, sintheta: number;

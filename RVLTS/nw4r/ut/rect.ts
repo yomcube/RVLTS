@@ -2,6 +2,7 @@
 //   https://github.com/kiwi515/ogws/blob/master/include/nw4r/ut/ut_Rect.h
 
 import { FSelect } from "nw4r/math/arithmetic";
+import { und0 } from "utils/utils";
 
 export class Rect {
     left: number;
@@ -10,13 +11,13 @@ export class Rect {
     bottom: number;
 
     constructor(left?: number, top?: number, right?: number, bottom?: number) {
-        this.left = left == undefined ? 0 : left;
-        this.top = top == undefined ? 0 : top;
-        this.right = right == undefined ? 0 : right;
-        this.bottom = bottom == undefined ? 0 : bottom;
+        this.left = und0(left);
+        this.top = und0(top);
+        this.right = und0(right);
+        this.bottom = und0(bottom);
     }
 
-    setWidth(width: number) {
+    setWidth(width: number): void {
         this.right = this.left + width;
     }
     getWidth(): number {
@@ -30,7 +31,7 @@ export class Rect {
         return this.bottom - this.top;
     }
 
-    normalize() {
+    normalize(): void {
         let l: number = this.left;
         let r: number = this.right;
         let t: number = this.top;
@@ -42,7 +43,7 @@ export class Rect {
         this.bottom = FSelect(b - t, b, t);
     }
 
-    moveTo(x: number, y: number) {
+    moveTo(x: number, y: number): void {
         this.right = x + this.getWidth();
         this.left = x;
         this.bottom = y + this.getHeight();
