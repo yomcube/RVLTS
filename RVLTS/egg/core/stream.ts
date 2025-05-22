@@ -24,9 +24,11 @@ export class Stream {
 		this.m_index = 0;
 	}
 
+	/** Sets the stream endianness. */
 	setEndian(e: Endian) {
 		this.m_endian = e;
 	}
+	/** Gets the stream index */
 	get index(): number {
 		return this.m_index;
 	}
@@ -63,42 +65,53 @@ export class Stream {
 		this.write(buf);
 	}
 
+	/** Reads an unsigned 8-bit integer from the stream. */
 	read_u8(): number {
 		let val = this._read(1);
 		return val.getUint8(0);
 	}
+	/** Reads an unsigned 16-bit integer from the stream. */
 	read_u16(): number {
 		let val = this._read(2);
 		return val.getUint16(0, !!this.m_endian);
 	}
+	/** Reads an unsigned 32-bit integer from the stream. */
 	read_u32(): number {
 		let val = this._read(4);
 		return val.getUint32(0, !!this.m_endian);
 	}
+	/** Reads an unsigned 64-bit integer from the stream. */
 	read_u64(): bigint {
 		let val = this._read(8);
 		return val.getBigUint64(0, !!this.m_endian);
 	}
+
+	/** Reads a signed 8-bit integer from the stream. */
 	read_s8(): number {
 		let val = this._read(1);
 		return val.getInt8(0);
 	}
+	/** Reads a signed 16-bit integer from the stream. */
 	read_s16(): number {
 		let val = this._read(2);
 		return val.getInt16(0, !!this.m_endian);
 	}
+	/** Reads a signed 32-bit integer from the stream. */
 	read_s32(): number {
 		let val = this._read(4);
 		return val.getInt32(0, !!this.m_endian);
 	}
+	/** Reads a signed 64-bit integer from the stream. */
 	read_s64(): bigint {
 		let val = this._read(8);
 		return val.getBigInt64(0, !!this.m_endian);
 	}
+	/** Reads a 32-bit floating point number from the stream. */
 	read_f32(): number {
 		let val = this._read(4);
 		return val.getFloat32(0, !!this.m_endian);
 	}
+	/** Reads a 64-bit floating point number from the stream. */
 	read_f64(): number {
 		let val = this._read(8);
 		return val.getFloat64(0, !!this.m_endian);
